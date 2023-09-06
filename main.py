@@ -95,9 +95,51 @@ class LinkedList:
         # Increment the length of the linked list by 1.
         self.length += 1
 
+    def pop(self):
+        """
+        Removes and returns the value of the last node in the linked list.
+        If the linked list is empty, it returns None.
+        """
+
+        # If the linked list is empty, return None.
+        if self.length == 0:
+            return None
+
+        # If there's only one node in the linked list.
+        if self.length == 1:
+            value = self.head.value
+            self.head = None
+            self.tail = None
+            self.length = 0
+            return value
+
+        # Start at the head of the linked list.
+        current = self.head
+        # This will be the node before the last node (the one we want to remove).
+        previous = None
+
+        # Traverse the linked list until reaching the last node.
+        while current.next_node is not None:
+            previous = current
+            current = current.next_node
+
+        # Set the node before the last node as the new tail.
+        self.tail = previous
+        # The new tail's next_node should be None since it's now the last node.
+        self.tail.next_node = None
+        # Decrement the length of the linked list by 1.
+        self.length -= 1
+
+        # Return the value of the removed node.
+        return current.value
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
 my_linked_list.append(999)
+
+my_linked_list.print_list()
+
+print(my_linked_list.pop())
 
 my_linked_list.print_list()
