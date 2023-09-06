@@ -72,7 +72,32 @@ class LinkedList:
             # Move to the next node in the list.
             current = current.next_node
 
+    def append(self, value):
+        """
+        Appends a new node with the given value to the end of the linked list.
+        If the linked list is empty (i.e., the head is None), it sets the new node as the head.
+        Otherwise, it attaches the new node to the tail's next_node and updates the tail to the new node.
+        The length of the linked list is incremented by 1.
+        """
+        # Create a new node with the provided value.
+        new_node = Node(value)
+
+        # If the linked list is empty, set the new node as the head.
+        if self.head is None:
+            self.head = new_node
+        # If the linked list is not empty, attach the new node to the tail's next_node.
+        else:
+            self.tail.next_node = new_node
+
+        # Update the tail to the new node.
+        self.tail = new_node
+
+        # Increment the length of the linked list by 1.
+        self.length += 1
+
 
 my_linked_list = LinkedList(69)
+my_linked_list.append(420)
+my_linked_list.append(999)
 
 my_linked_list.print_list()
