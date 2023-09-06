@@ -55,3 +55,24 @@ class LinkedList:
             self.tail = initial_node
             # Set the number of nodes in the linked list to 1.
             self.length = 1
+
+    def print_list(self):
+        """
+        Traverse the linked list and print the value of each node.
+        This method provides a visual representation of the linked list's contents.
+        """
+        # Start at the head of the linked list.
+        current = self.head
+
+        # Traverse the linked list until reaching the end.
+        while current is not None:
+            # Print the value of the current node.
+            print(current.value)
+
+            # Move to the next node in the list.
+            current = current.next_node
+
+
+my_linked_list = LinkedList(69)
+
+my_linked_list.print_list()
