@@ -133,13 +133,38 @@ class LinkedList:
         # Return the value of the removed node.
         return current.value
 
+    def prepend(self, value):
+        """
+        Prepends a new node with the given value to the start of the linked list.
+        If the linked list is empty (i.e., the head is None), it sets the new node as both the head and tail.
+        Otherwise, it sets the new node's next_node to the current head and updates the head to the new node.
+        The length of the linked list is incremented by 1.
+        """
+
+        # Create a new node with the provided value.
+        new_node = Node(value)
+
+        # If the linked list is empty, set the new node as both the head and tail.
+        if self.length == 0:
+            self.tail = new_node
+        # If the linked list is not empty, set the new node's next_node to the current head.
+        else:
+            new_node.next_node = self.head
+
+        # Update the head to the new node.
+        self.head = new_node
+
+        # Increment the length of the linked list by 1.
+        self.length += 1
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
 my_linked_list.append(999)
-
 my_linked_list.print_list()
 
 print(my_linked_list.pop())
+my_linked_list.print_list()
 
+my_linked_list.prepend(1)
 my_linked_list.print_list()
