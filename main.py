@@ -217,6 +217,15 @@ class LinkedList:
         # Return the node at the specified index.
         return current
 
+    def set_value(self, index, value):
+        current = self.get(index)
+
+        if current is not None:
+            current.value = value
+            return True
+
+        return False
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
@@ -238,4 +247,10 @@ print("-------------------")
 
 get_index_at_one = my_linked_list.get(1)
 print(get_index_at_one.value)
+print("-------------------")
+
+my_linked_list.print_list()
+set_value_at_index = my_linked_list.set_value(1, 25)
+my_linked_list.print_list()
+print(set_value_at_index)
 print("-------------------")
