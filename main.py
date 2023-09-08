@@ -95,6 +95,8 @@ class LinkedList:
         # Increment the length of the linked list by 1.
         self.length += 1
 
+        return True
+
     def pop(self):
         """
         Removes and returns the value of the last node in the linked list.
@@ -156,6 +158,8 @@ class LinkedList:
 
         # Increment the length of the linked list by 1.
         self.length += 1
+
+        return True
 
     def pop_first(self):
         """
@@ -240,6 +244,48 @@ class LinkedList:
         # If the index is out of bounds or no node exists at the specified index, return False.
         return False
 
+    def insert(self, index, value):
+        """
+        Inserts a new node with the given value at the specified index in the linked list.
+
+        Args:
+            index (int): The index at which to insert the new node.
+            value: The value for the new node.
+
+        Returns:
+            bool: True if the node was successfully inserted, False otherwise (e.g., if the index is out of bounds).
+        """
+
+        # Check if the index is out of bounds (either negative or greater than the length of the list).
+        if index < 0 or index > self.length:
+            return False
+
+        # If the index is 0, prepend the new node to the start of the list.
+        if index == 0:
+            return self.prepend(value)
+
+        # If the index is equal to the length of the list, append the new node to the end of the list.
+        if index == self.length:
+            return self.append(value)
+
+        # Create a new node with the given value.
+        new_node = Node(value)
+
+        # Retrieve the node immediately before the specified index.
+        temp = self.get(index - 1)
+
+        # Set the next_node of the new node to point to the node that currently occupies the specified index.
+        new_node.next_node = temp.next_node
+
+        # Update the next_node of the node immediately before the specified index to point to the new node.
+        temp.next_node = new_node
+
+        # Increment the length of the linked list.
+        self.length += 1
+
+        # Return True to indicate successful insertion.
+        return True
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
@@ -267,4 +313,9 @@ my_linked_list.print_list()
 set_value_at_index = my_linked_list.set_value(1, 25)
 my_linked_list.print_list()
 print(set_value_at_index)
+print("-------------------")
+
+my_linked_list.print_list()
+my_linked_list.insert(1, 600)
+my_linked_list.print_list()
 print("-------------------")
