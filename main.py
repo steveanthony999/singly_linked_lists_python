@@ -192,14 +192,29 @@ class LinkedList:
         return current
 
     def get(self, index):
+        """
+        Retrieves the node at the specified index in the linked list.
+
+        Args:
+            index (int): The index of the node to retrieve.
+
+        Returns:
+            Node: The node at the specified index. If the index is out of bounds, returns None.
+        """
+
+        # Check if the index is out of bounds (negative or greater than or equal to the length of the list).
+        # If so, return None.
         if index < 0 or index >= self.length:
             return None
 
+        # Start at the head of the linked list.
         current = self.head
 
+        # Traverse the linked list until reaching the desired index.
         for _ in range(index):
             current = current.next_node
 
+        # Return the node at the specified index.
         return current
 
 
