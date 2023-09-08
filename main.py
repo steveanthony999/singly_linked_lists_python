@@ -131,7 +131,7 @@ class LinkedList:
         self.length -= 1
 
         # Return the value of the removed node.
-        return current.value
+        return current
 
     def prepend(self, value):
         """
@@ -157,6 +157,40 @@ class LinkedList:
         # Increment the length of the linked list by 1.
         self.length += 1
 
+    def pop_first(self):
+        """
+        Removes and returns the first node (head) of the linked list.
+
+        If the linked list is empty, it returns None. If after removal, the list becomes empty,
+        it updates the tail to None as well. The length of the linked list is decremented by 1.
+
+        Returns:
+            Node: The node that was removed. If the list is empty, returns None.
+        """
+
+        # If the linked list is empty, return None.
+        if self.length == 0:
+            return None
+
+        # Store the current head node.
+        current = self.head
+
+        # Update the head to the next node.
+        self.head = current.next_node
+
+        # Detach the current node from the list.
+        current.next_node = None
+
+        # Decrement the length of the linked list by 1.
+        self.length -= 1
+
+        # If the list has become empty after removal, set the tail to None.
+        if self.length == 0:
+            self.tail = None
+
+        # Return the removed node.
+        return current
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
@@ -167,4 +201,7 @@ print(my_linked_list.pop())
 my_linked_list.print_list()
 
 my_linked_list.prepend(1)
+my_linked_list.print_list()
+
+my_linked_list.pop_first()
 my_linked_list.print_list()
