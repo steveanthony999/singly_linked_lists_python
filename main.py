@@ -191,17 +191,36 @@ class LinkedList:
         # Return the removed node.
         return current
 
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return None
+
+        current = self.head
+
+        for _ in range(index):
+            current = current.next_node
+
+        return current
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
 my_linked_list.append(999)
 my_linked_list.print_list()
+print("-------------------")
 
-print(my_linked_list.pop())
-my_linked_list.print_list()
+pop_node = my_linked_list.pop()
+print(pop_node)
+print("-------------------")
 
 my_linked_list.prepend(1)
 my_linked_list.print_list()
+print("-------------------")
 
-my_linked_list.pop_first()
-my_linked_list.print_list()
+pop_first_node = my_linked_list.pop_first()
+print(pop_first_node.value)
+print("-------------------")
+
+get_index_at_one = my_linked_list.get(1)
+print(get_index_at_one.value)
+print("-------------------")
