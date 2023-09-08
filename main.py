@@ -286,6 +286,85 @@ class LinkedList:
         # Return True to indicate successful insertion.
         return True
 
+    def remove(self, index):
+        """
+        Removes a node at the specified index from the linked list.
+
+        If the index is out of bounds, the method returns None.
+        If the index points to the first node, it uses the pop_first method.
+        If the index points to the last node, it uses the pop method.
+        For any other index, it updates the references to remove the target node
+        and decrements the list's length.
+
+        Args:
+        - index (int): The position of the node to be removed.
+
+        Returns:
+        - Node: The removed node. Returns None if the index is out of bounds.
+        """
+
+        # Check if the index is out of bounds of the linked list.
+        if index < 0 or index >= self.length:
+            return None
+
+        # If the index is 0, remove the first node.
+        if index == 0:
+            return self.pop_first()
+
+        # If the index is the last position, remove the last node.
+        if index == self.length - 1:
+            return self.pop()
+
+        # Get the node just before the target node to be removed.
+        prev_node = self.get(index - 1)
+
+        # Get the target node to be removed.
+        current = prev_node.next_node
+
+        # Update the 'next_node' reference of the previous node to skip the target node.
+        prev_node.next_node = current.next_node
+
+        # Clear the 'next_node' reference of the target node.
+        current.next_node = None
+
+        # Decrement the length of the linked list.
+        self.length -= 1
+
+        # Return the removed node.
+        return current
+
+    def reverse(self):
+        """
+        Reverses the linked list in-place.
+
+        This method iterates through the linked list and modifies the next_node pointers of each node
+        to point to the previous node, effectively reversing the list. After the reversal, the head
+        and tail pointers of the linked list are updated accordingly.
+        """
+
+        # Start at the head of the linked list.
+        current = self.head
+
+        # Update the head to point to the current tail and the tail to point to the current head.
+        self.head = self.tail
+        self.tail = current
+
+        # Initialize pointers to keep track of the next node and the previous node.
+        after_node = current.next_node
+        prev_node = None
+
+        # Iterate through the linked list.
+        for _ in range(self.length):
+            # Store the next node before modifying the current node's next_node pointer.
+            after_node = current.next_node
+
+            # Update the current node's next_node pointer to point to the previous node.
+            current.next_node = prev_node
+
+            # Move to the next node in the original sequence.
+            prev_node = current
+            current = after_node
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
@@ -317,5 +396,14 @@ print("-------------------")
 
 my_linked_list.print_list()
 my_linked_list.insert(1, 600)
+my_linked_list.print_list()
+print("-------------------")
+
+my_linked_list.remove(1)
+my_linked_list.print_list()
+print("-------------------")
+
+my_linked_list.print_list()
+my_linked_list.reverse()
 my_linked_list.print_list()
 print("-------------------")
