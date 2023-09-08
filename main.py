@@ -218,12 +218,26 @@ class LinkedList:
         return current
 
     def set_value(self, index, value):
+        """
+        Updates the value of the node at the specified index in the linked list.
+
+        Args:
+            index (int): The index of the node to update.
+            value: The new value to set for the node at the specified index.
+
+        Returns:
+            bool: True if the value was successfully updated, False otherwise (e.g., if the index is out of bounds).
+        """
+
+        # Retrieve the node at the specified index using the get method.
         current = self.get(index)
 
+        # If a node exists at the specified index, update its value.
         if current is not None:
             current.value = value
             return True
 
+        # If the index is out of bounds or no node exists at the specified index, return False.
         return False
 
 
