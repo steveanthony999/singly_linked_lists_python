@@ -365,6 +365,33 @@ class LinkedList:
             prev_node = current
             current = after_node
 
+    def find_middle_node(self):
+        """
+        Finds and returns the middle node of the linked list.
+
+        This method uses the two-pointer technique: a slow pointer and a fast pointer.
+        The slow pointer moves one step at a time, while the fast pointer moves two steps.
+        By the time the fast pointer reaches the end of the list, the slow pointer will be at the middle.
+
+        If the linked list has an even number of nodes, this method returns the second middle node.
+        For example, in the list [1, 2, 3, 4], it will return the node with value 3.
+
+        Returns:
+            Node: The middle node of the linked list. If the list is empty, returns None.
+        """
+
+        # Initialize the slow and fast pointers to the head of the linked list.
+        slow = self.head
+        fast = self.head
+
+        # Traverse the linked list with the fast pointer moving twice as fast as the slow pointer.
+        while fast is not None and fast.next_node is not None:
+            slow = slow.next_node  # Move the slow pointer one step.
+            fast = fast.next_node.next_node  # Move the fast pointer two steps.
+
+        # When the loop ends, the slow pointer will be at the middle of the linked list.
+        return slow
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
@@ -406,4 +433,14 @@ print("-------------------")
 my_linked_list.print_list()
 my_linked_list.reverse()
 my_linked_list.print_list()
+print("-------------------")
+
+my_linked_list.remove(0)
+my_linked_list.remove(0)
+my_linked_list.append(1)
+my_linked_list.append(2)
+my_linked_list.append(3)
+my_linked_list.append(4)
+my_linked_list.append(5)
+print(my_linked_list.find_middle_node().value)
 print("-------------------")
