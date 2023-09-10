@@ -392,6 +392,37 @@ class LinkedList:
         # When the loop ends, the slow pointer will be at the middle of the linked list.
         return slow
 
+    def has_loop(self):
+        """
+        Determines if the linked list contains a loop/cycle using Floyd's Cycle-Finding Algorithm.
+
+        This algorithm, also known as the "Tortoise and the Hare" algorithm, uses two pointers that move through
+        the list at different speeds. The slow pointer ('tortoise') moves one step at a time while the fast pointer
+        ('hare') moves two steps at a time. If there is a loop in the list, the fast pointer will eventually catch up
+        to the slow pointer. If there's no loop, the fast pointer will reach the end of the list.
+
+        Returns:
+            bool: True if the linked list has a loop, False otherwise.
+        """
+
+        # Initialize two pointers: 'slow' and 'fast'. Both start at the head of the linked list.
+        slow = self.head
+        fast = self.head
+
+        # Continue the loop as long as the 'fast' pointer is not None and its next node is also not None.
+        while fast is not None and fast.next is not None:
+            # Move the 'slow' pointer one step/node at a time.
+            slow = slow.next
+            # Move the 'fast' pointer two steps/nodes at a time.
+            fast = fast.next.next
+
+            # If the 'fast' pointer catches up to the 'slow' pointer, it means there's a loop in the linked list.
+            if fast == slow:
+                return True
+
+        # If the loop completes without the 'fast' pointer catching up to the 'slow' pointer, there's no loop.
+        return False
+
 
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
