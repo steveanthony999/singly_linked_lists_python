@@ -410,11 +410,11 @@ class LinkedList:
         fast = self.head
 
         # Continue the loop as long as the 'fast' pointer is not None and its next node is also not None.
-        while fast is not None and fast.next is not None:
+        while fast is not None and fast.next_node is not None:
             # Move the 'slow' pointer one step/node at a time.
-            slow = slow.next
+            slow = slow.next_node
             # Move the 'fast' pointer two steps/nodes at a time.
-            fast = fast.next.next
+            fast = fast.next_node.next_node
 
             # If the 'fast' pointer catches up to the 'slow' pointer, it means there's a loop in the linked list.
             if fast == slow:
@@ -422,6 +422,64 @@ class LinkedList:
 
         # If the loop completes without the 'fast' pointer catching up to the 'slow' pointer, there's no loop.
         return False
+
+    def empty_linked_list(self):
+        """
+        Empties the linked list by setting the head and tail to None and the length to 0.
+
+        This method effectively removes all nodes from the linked list, making it an empty list.
+        """
+        self.head = None
+        self.tail = None
+        self.length = 0
+
+    def partition_list(self, x):
+        """
+        Partition the linked list such that all nodes with values less than x come
+        before nodes with values greater than or equal to x, while preserving the
+        original relative order of the nodes in each of the two partitions.
+
+        Args:
+        - x (int): The partitioning value.
+
+        Returns:
+        None: The function modifies the linked list in place.
+        """
+
+        # Check if the list is empty
+        if self.head is None:
+            return None
+
+        # Initialize dummy nodes to assist in partitioning
+        dummy1 = Node(0)
+        dummy2 = Node(0)
+
+        # Set pointers to the start of the two new partitions
+        prev1 = dummy1
+        prev2 = dummy2
+
+        # Start traversal from the head of the list
+        current = self.head
+
+        # Traverse the list and partition nodes based on their value relative to x
+        while current is not None:
+            if current.value < x:
+                prev1.next_node = current
+                prev1 = current
+            else:
+                prev2.next_node = current
+                prev2 = current
+            current = current.next_node
+
+        # Terminate the two partitions
+        prev1.next_node = None
+        prev2.next_node = None
+
+        # Connect the two partitions
+        prev1.next_node = dummy2.next_node
+
+        # Update the head to point to the start of the partitioned list
+        self.head = dummy1.next_node
 
 
 def find_kth_from_end(ll, k):
@@ -517,4 +575,16 @@ print("-------------------")
 k = 2
 result = find_kth_from_end(my_linked_list, k)
 print(result.value)  # Output: 4
+print("-------------------")
+
+
+my_linked_list.empty_linked_list()
+my_linked_list.append(2)
+my_linked_list.append(8)
+my_linked_list.append(1)
+my_linked_list.append(4)
+my_linked_list.append(3)
+my_linked_list.append(7)
+my_linked_list.partition_list(4)
+my_linked_list.print_list()
 print("-------------------")
