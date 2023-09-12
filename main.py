@@ -481,6 +481,46 @@ class LinkedList:
         # Update the head to point to the start of the partitioned list
         self.head = dummy1.next_node
 
+    def remove_duplicates(self):
+        """
+        Removes duplicate nodes from the linked list.
+
+        This method traverses the linked list and uses a set to keep track of
+        the values that have been encountered. If a duplicate value is found,
+        the node containing that value is removed from the list. The relative
+        order of the remaining nodes is preserved.
+
+        Attributes:
+            self (LinkedList): The linked list from which duplicates are to be removed.
+
+        Returns:
+            None: The method modifies the linked list in-place and does not return any value.
+        """
+
+        # Initialize a set to store unique values from the linked list
+        values = set()
+
+        # Initialize pointers for the previous and current nodes
+        prev = None
+        current = self.head
+
+        # Traverse the linked list
+        while current is not None:
+            # If the current value is already in the set (i.e., it's a duplicate)
+            if current.value in values:
+                # Bypass the current node to remove it from the list
+                prev.next_node = current.next_node
+                # Decrement the length of the linked list
+                self.length -= 1
+            else:
+                # If the value is unique, add it to the set
+                values.add(current.value)
+                # Move the previous pointer to the current node
+                prev = current
+
+            # Move to the next node in the list
+            current = current.next_node
+
 
 def find_kth_from_end(ll, k):
     """
@@ -586,5 +626,17 @@ my_linked_list.append(4)
 my_linked_list.append(3)
 my_linked_list.append(7)
 my_linked_list.partition_list(4)
+my_linked_list.print_list()
+print("-------------------")
+
+my_linked_list.empty_linked_list()
+my_linked_list.append(1)
+my_linked_list.append(2)
+my_linked_list.append(3)
+my_linked_list.append(1)
+my_linked_list.append(4)
+my_linked_list.append(2)
+my_linked_list.append(5)
+my_linked_list.remove_duplicates()
 my_linked_list.print_list()
 print("-------------------")
