@@ -551,6 +551,49 @@ class LinkedList:
         # Return the final decimal value
         return decimal
 
+    def reverse_between(self, m, n):
+        """
+        Reverses the nodes of the linked list from index m to index n (inclusive) in one pass and in-place.
+
+        Parameters:
+        - m (int): The starting index for the reverse.
+        - n (int): The ending index for the reverse.
+
+        Returns:
+        None: If the linked list is empty or has only one node.
+        Otherwise, it modifies the linked list in-place.
+
+        Example:
+        Suppose the linked list is 1 -> 2 -> 3 -> 4 -> 5, and m = 2 and n = 4.
+        After calling this method, the linked list will be modified to 1 -> 2 -> 5 -> 4 -> 3.
+        """
+
+        # If the linked list has only one node or is empty
+        if self.length <= 1:
+            return None
+
+        # Initialize a dummy node
+        dummy = Node(0)
+        dummy.next_node = self.head
+        prev = dummy
+
+        # Move the prev pointer to the node just before the m-th node
+        for _ in range(m):
+            prev = prev.next_node
+
+        # Set current to the m-th node
+        current = prev.next_node
+
+        # Reverse the nodes between m and n
+        for _ in range(n - m):
+            node_to_move = current.next_node
+            current.next_node = node_to_move.next_node
+            node_to_move.next_node = prev.next_node
+            prev.next_node = node_to_move
+
+        # Update the head of the linked list
+        self.head = dummy.next_node
+
 
 def find_kth_from_end(ll, k):
     """
@@ -678,4 +721,14 @@ my_linked_list.append(0)
 my_linked_list.append(1)
 my_linked_list.print_list()
 print(my_linked_list.binary_to_decimal())
+print("-------------------")
+
+my_linked_list.empty_linked_list()
+my_linked_list.append(1)
+my_linked_list.append(2)
+my_linked_list.append(3)
+my_linked_list.append(4)
+my_linked_list.append(5)
+my_linked_list.reverse_between(2, 4)
+my_linked_list.print_list()
 print("-------------------")
