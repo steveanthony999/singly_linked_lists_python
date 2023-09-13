@@ -521,6 +521,36 @@ class LinkedList:
             # Move to the next node in the list
             current = current.next_node
 
+    def binary_to_decimal(self):
+        """
+        Convert a binary number represented by a linked list to its decimal equivalent.
+
+        The linked list represents a binary number where each node contains a single bit (0 or 1).
+        The head of the linked list represents the least significant bit (LSB), and the tail
+        represents the most significant bit (MSB).
+
+        Returns:
+            int: The decimal representation of the binary number.
+        """
+
+        # Initialize the decimal value to 0
+        decimal = 0
+
+        # Start at the head of the linked list
+        current = self.head
+
+        # Traverse the linked list
+        while current is not None:
+            # For each bit, shift the current decimal value to the left (multiply by 2)
+            # and add the current bit's value
+            decimal = decimal * 2 + current.value
+
+            # Move to the next node
+            current = current.next_node
+
+        # Return the final decimal value
+        return decimal
+
 
 def find_kth_from_end(ll, k):
     """
@@ -639,4 +669,13 @@ my_linked_list.append(2)
 my_linked_list.append(5)
 my_linked_list.remove_duplicates()
 my_linked_list.print_list()
+print("-------------------")
+
+my_linked_list.empty_linked_list()
+my_linked_list.append(1)
+my_linked_list.append(1)
+my_linked_list.append(0)
+my_linked_list.append(1)
+my_linked_list.print_list()
+print(my_linked_list.binary_to_decimal())
 print("-------------------")
