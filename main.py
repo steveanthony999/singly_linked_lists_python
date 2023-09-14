@@ -594,6 +594,49 @@ class LinkedList:
         # Update the head of the linked list
         self.head = dummy.next_node
 
+    def merge_two_lists(self, list1, list2):
+        """
+        Merge two sorted linked lists into a single sorted linked list.
+
+        Parameters:
+        - list1: Head of the first sorted linked list.
+        - list2: Head of the second sorted linked list.
+
+        Returns:
+        - Head of the merged sorted linked list.
+        """
+
+        # Initialize a dummy node to simplify the merging process
+        dummy = Node(-1)
+        # 'current' will be used to traverse and build the merged list
+        current = dummy
+
+        # Continue until one of the lists becomes empty
+        while list1 and list2:
+            # If the current node of list1 has a smaller value
+            if list1.value < list2.value:
+                # Attach list1's node to the merged list
+                current.next_node = list1
+                # Move to the next node in list1
+                list1 = list1.next_node
+            else:
+                # Attach list2's node to the merged list
+                current.next_node = list2
+                # Move to the next node in list2
+                list2 = list2.next_node
+            # Move to the next position in the merged list
+            current = current.next_node
+
+        # If list1 is not empty, attach its remaining nodes to the merged list
+        if list1:
+            current.next_node = list1
+        # If list2 is not empty, attach its remaining nodes to the merged list
+        if list2:
+            current.next_node = list2
+
+        # Return the head of the merged list (next of the dummy node)
+        return dummy.next_node
+
 
 def find_kth_from_end(ll, k):
     """
@@ -633,48 +676,58 @@ def find_kth_from_end(ll, k):
     return slow
 
 
+# append
 my_linked_list = LinkedList(69)
 my_linked_list.append(420)
 my_linked_list.append(999)
 my_linked_list.print_list()
 print("-------------------")
 
+# pop
 pop_node = my_linked_list.pop()
 print(pop_node)
 print("-------------------")
 
+# prepend
 my_linked_list.prepend(1)
 my_linked_list.print_list()
 print("-------------------")
 
+# pop_first
 pop_first_node = my_linked_list.pop_first()
 print(pop_first_node.value)
 print("-------------------")
 
+# get
 get_index_at_one = my_linked_list.get(1)
 print(get_index_at_one.value)
 print("-------------------")
 
+# set_value
 my_linked_list.print_list()
 set_value_at_index = my_linked_list.set_value(1, 25)
 my_linked_list.print_list()
 print(set_value_at_index)
 print("-------------------")
 
+# insert
 my_linked_list.print_list()
 my_linked_list.insert(1, 600)
 my_linked_list.print_list()
 print("-------------------")
 
+# remove
 my_linked_list.remove(1)
 my_linked_list.print_list()
 print("-------------------")
 
+# reverse
 my_linked_list.print_list()
 my_linked_list.reverse()
 my_linked_list.print_list()
 print("-------------------")
 
+# find_middle_node
 my_linked_list.remove(0)
 my_linked_list.remove(0)
 my_linked_list.append(1)
@@ -685,12 +738,13 @@ my_linked_list.append(5)
 print(my_linked_list.find_middle_node().value)
 print("-------------------")
 
+# find_kth_from_end
 k = 2
 result = find_kth_from_end(my_linked_list, k)
 print(result.value)  # Output: 4
 print("-------------------")
 
-
+# partition_list
 my_linked_list.empty_linked_list()
 my_linked_list.append(2)
 my_linked_list.append(8)
@@ -702,6 +756,7 @@ my_linked_list.partition_list(4)
 my_linked_list.print_list()
 print("-------------------")
 
+# remove_duplicates
 my_linked_list.empty_linked_list()
 my_linked_list.append(1)
 my_linked_list.append(2)
@@ -714,6 +769,7 @@ my_linked_list.remove_duplicates()
 my_linked_list.print_list()
 print("-------------------")
 
+# binary_to_decimal
 my_linked_list.empty_linked_list()
 my_linked_list.append(1)
 my_linked_list.append(1)
@@ -723,6 +779,7 @@ my_linked_list.print_list()
 print(my_linked_list.binary_to_decimal())
 print("-------------------")
 
+# reverse_between
 my_linked_list.empty_linked_list()
 my_linked_list.append(1)
 my_linked_list.append(2)
@@ -731,4 +788,20 @@ my_linked_list.append(4)
 my_linked_list.append(5)
 my_linked_list.reverse_between(2, 4)
 my_linked_list.print_list()
+print("-------------------")
+
+# merge_two_lists
+my_linked_list.empty_linked_list()
+my_linked_list.append(1)
+my_linked_list.append(2)
+my_linked_list.append(4)
+my_linked_list_2 = LinkedList(1)
+my_linked_list_2.append(3)
+my_linked_list_2.append(4)
+my_merged_linked_list = my_linked_list.merge_two_lists(
+    my_linked_list.head, my_linked_list_2.head
+)
+while my_merged_linked_list is not None:
+    print(my_merged_linked_list.value)
+    my_merged_linked_list = my_merged_linked_list.next_node
 print("-------------------")
