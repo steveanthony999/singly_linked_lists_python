@@ -637,6 +637,23 @@ class LinkedList:
         # Return the head of the merged list (next of the dummy node)
         return dummy.next_node
 
+    def merge_two_lists_recursively(self, list1, list2):
+        if list1 is None:
+            return list2
+        if list2 is None:
+            return list1
+
+        if list1.value < list2.value:
+            head = list1
+            list1 = list1.next_node
+        else:
+            head = list2
+            list2 = list2.next_node
+
+        head.next_node = self.merge_two_lists_recursively(list1, list2)
+
+        return head
+
 
 def find_kth_from_end(ll, k):
     """
@@ -804,4 +821,21 @@ my_merged_linked_list = my_linked_list.merge_two_lists(
 while my_merged_linked_list is not None:
     print(my_merged_linked_list.value)
     my_merged_linked_list = my_merged_linked_list.next_node
+print("-------------------")
+
+my_linked_list.empty_linked_list()
+my_linked_list.append(1)
+my_linked_list.append(2)
+my_linked_list.append(4)
+my_linked_list_2 = LinkedList(1)
+my_linked_list_2.append(3)
+my_linked_list_2.append(4)
+
+merged_list = my_linked_list.merge_two_lists_recursively(
+    my_linked_list.head, my_linked_list_2.head
+)
+
+while merged_list is not None:
+    print(merged_list.value)
+    merged_list = merged_list.next_node
 print("-------------------")
