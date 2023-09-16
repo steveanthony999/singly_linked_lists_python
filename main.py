@@ -638,11 +638,28 @@ class LinkedList:
         return dummy.next_node
 
     def merge_two_lists_recursively(self, list1, list2):
+        """
+        Merge two sorted linked lists into one sorted linked list using recursion.
+
+        Parameters:
+        - list1: The head node of the first sorted linked list.
+        - list2: The head node of the second sorted linked list.
+
+        Returns:
+        - The head node of the merged sorted linked list.
+
+        Example:
+        If list1 is 1 -> 2 -> 4 and list2 is 1 -> 3 -> 4,
+        the merged list will be 1 -> 1 -> 2 -> 3 -> 4 -> 4.
+        """
+
+        # Base cases: if one of the lists is empty, return the other list.
         if list1 is None:
             return list2
         if list2 is None:
             return list1
 
+        # Determine which node has a smaller value and set it as the current head.
         if list1.value < list2.value:
             head = list1
             list1 = list1.next_node
@@ -650,6 +667,7 @@ class LinkedList:
             head = list2
             list2 = list2.next_node
 
+        # Recursively merge the remaining nodes and link them to the current head.
         head.next_node = self.merge_two_lists_recursively(list1, list2)
 
         return head
