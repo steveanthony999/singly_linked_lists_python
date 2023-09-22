@@ -3,18 +3,28 @@ from typing import Optional
 
 
 class LinkedList:
-    def __init__(self):
-        self.head = None
+    def __init__(self, data=None):
+        if data is None:
+            self.head = None
+            self.tail = None
+            self.length = 0
+        else:
+            initial_node = Node(data)
+            self.head = initial_node
+            self.tail = initial_node
+            self.length = 1
 
     def append(self, data):
         new_node = Node(data)
-        if not self.head:
+
+        if self.head is None:
             self.head = new_node
-            return
-        last_node = self.head
-        while last_node.next:
-            last_node = last_node.next
-        last_node.next = new_node
+        else:
+            self.tail.next = new_node
+        self.tail = new_node
+        self.length += 1
+
+        return True
 
     def print_list(self):
         cur_node = self.head
@@ -71,3 +81,26 @@ class LinkedList:
             current.next = list2
 
         return dummy.next
+
+    def reverseList(self, head: Optional[Node]) -> Optional[Node]:
+        # Iterative
+        # current = head
+        # prev = None
+
+        # while current is not None:
+        #     next_node = current.next
+        #     current.next = prev
+        #     prev = current
+        #     current = next_node
+
+        # return prev
+
+        # recursive
+        if head is None or head.next is None:
+            return head
+
+        reversed_sublist = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+
+        return reversed_sublist

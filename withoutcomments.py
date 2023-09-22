@@ -316,6 +316,16 @@ class LinkedList:
 
         return head
 
+    def delete_duplicates(self):
+        current = self.head
+
+        while current is not None and current.next_node is not None:
+            next_distinct = current.next_node
+            while next_distinct is not None and next_distinct.value == current.value:
+                next_distinct = next_distinct.next_node
+            current.next_node = next_distinct
+            current = next_distinct
+
 
 def find_kth_from_end(ll, k):
     slow = ll.head
@@ -464,4 +474,23 @@ merged_list = my_linked_list.merge_two_lists_recursively(
 while merged_list is not None:
     print(merged_list.value)
     merged_list = merged_list.next_node
+print("-------------------")
+
+my_linked_list.empty_linked_list()
+my_linked_list_2.empty_linked_list()
+my_linked_list.append(1)
+my_linked_list.append(1)
+my_linked_list.append(2)
+my_linked_list.append(3)
+my_linked_list.append(3)
+my_linked_list.append(3)
+my_linked_list.append(3)
+my_linked_list.append(3)
+my_linked_list.append(3)
+my_linked_list.append(4)
+my_linked_list.append(4)
+my_linked_list.append(5)
+my_linked_list.append(6)
+my_linked_list.delete_duplicates()
+my_linked_list.print_list()
 print("-------------------")
